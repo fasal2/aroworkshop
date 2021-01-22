@@ -16,30 +16,25 @@ You'll be doing the majority of the labs using the OpenShift CLI, but you can al
 
 ## Prerequisites
 
-
 ### Azure subscription and Azure Red Hat OpenShift environment
-
-{% collapsible %}
 
 If you have been provided with a Microsoft Hands-on Labs environment for this workshop through a registration link and an activation code, please continue to registration and activate the lab.
 
-![Registration](media/managedlab/0-registration.png)
+![Registration](../media/managedlab/0-registration.png)
 
 After you complete the registration, click Launch Lab
 
-![Launch lab](media/managedlab/1-launchlab.png)
+![Launch lab](../media/managedlab/1-launchlab.png)
 
 The Azure subscription and associated lab credentials will be provisioned. This will take a few moments. This process will also provision an Azure Red Hat OpenShift cluster.
 
-![Preparing lab](media/managedlab/2-preparinglab.png)
+![Preparing lab](../media/managedlab/2-preparinglab.png)
 
 Once the environment is provisioned, a screen with all the appropriate lab credentials will be presented. Additionally, you'll have your Azure Red Hat OpenShift cluster endpoint. The credentials will also be emailed to the email address entered at registration.
 
-![Credentials](media/managedlab/3-credentials.png)
+![Credentials](../media/managedlab/3-credentials.png)
 
 You can now skip the **Create cluster** section and jump to [create project](#createproject).
-
-{% endcollapsible %}
 
 ### Tools
 
@@ -47,13 +42,12 @@ You can now skip the **Create cluster** section and jump to [create project](#cr
 
 You can use the Azure Cloud Shell accessible at <https://shell.azure.com> once you login with an Azure subscription.
 
-{% collapsible %}
 
 Head over to <https://shell.azure.com> and sign in with your Azure Subscription details.
 
 Select **Bash** as your shell.
 
-![Select Bash](media/cloudshell/0-bash.png)
+![Select Bash](../media/cloudshell/0-bash.png)
 
 Select **Show advanced settings**
 
@@ -61,22 +55,20 @@ Select **Show advanced settings**
 
 Set the **Storage account** and **File share** names to your resource group name (all lowercase, without any special characters). Leave other settings unchanged, then hit **Create storage**
 
-![Azure Cloud Shell](media/cloudshell/2-storageaccount-fileshare.png)
+![Azure Cloud Shell](../media/cloudshell/2-storageaccount-fileshare.png)
 
 You should now have access to the Azure Cloud Shell
 
-![Set the storage account and fileshare names](media/cloudshell/3-cloudshell.png)
+![Set the storage account and fileshare names](../media/cloudshell/3-cloudshell.png)
 
-{% endcollapsible %}
 
 #### OpenShift CLI (oc)
 
 You'll need to download the **latest OpenShift CLI (oc)** client tools for OpenShift 4. You can follow the steps below on the Azure Cloud Shell.
 
-{% collapsible %}
 
 > **Note** You'll need to change the link below to the latest link you get from the page.
-> ![GitHub release links](media/github-oc-release.png)
+> ![GitHub release links](../media/github-oc-release.png)
 
 Please run following commands on Azure Cloud Shell to download and setup the OpenShift client.
 
@@ -100,7 +92,7 @@ In case you want to work from your own operating system, here are the links to t
 - https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz
 - https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-mac.tar.gz
 
-{% endcollapsible %}
+
 
 #### GitHub Account
 You'll need a personal GitHub account. You can sign up for free [here](https://github.com/join).
@@ -113,7 +105,7 @@ Source-to-Image (S2I) is a toolkit and workflow for building reproducible contai
 
 #### How it works
 
-{% collapsible %}
+
 
 For a dynamic language like Ruby, the build-time and run-time environments are typically the same. Starting with a builder image that describes this environment - with Ruby, Bundler, Rake, Apache, GCC, and other packages needed to set up and run a Ruby application installed - source-to-image performs the following steps:
 
@@ -137,11 +129,11 @@ For example, to create a reproducible build pipeline for Tomcat (the popular Jav
 
 By placing our build logic inside of images, and by combining the images into multiple steps, we can keep our runtime environment close to our build environment (same JDK, same Tomcat JARs) without requiring build tools to be deployed to production.
 
-{% endcollapsible %}
+
 
 #### Goals and benefits
 
-{% collapsible %}
+
 
 ##### Reproducibility
 
@@ -159,13 +151,13 @@ Instead of building multiple layers in a single Dockerfile, S2I encourages autho
 
 Dockerfiles are run without many of the normal operational controls of containers, usually running as root and having access to the container network. S2I can be used to control what permissions and privileges are available to the builder image since the build is launched in a single container. In concert with platforms like OpenShift, source-to-image can enable admins to tightly control what privileges developers have at build time.
 
-{% endcollapsible %}
+
 
 ### Routes
 
 An OpenShift `Route` exposes a service at a host name, like www.example.com, so that external clients can reach it by name. When a `Route` object is created on OpenShift, it gets picked up by the built-in HAProxy load balancer in order to expose the requested service and make it externally available with the given configuration. You might be familiar with the Kubernetes `Ingress` object and might already be asking "what's the difference?". Red Hat created the concept of `Route` in order to fill this need and then contributed the design principles behind this to the community; which heavily influenced the `Ingress` design.  Though a `Route` does have some additional features as can be seen in the chart below.
 
-![routes vs ingress](/media/managedlab/routes-vs-ingress.png)
+![routes vs ingress](../media/managedlab/routes-vs-ingress.png)
 
 > **NOTE:** DNS resolution for a host name is handled separately from routing; your administrator may have configured a cloud domain that will always correctly resolve to the router, or if using an unrelated host name you may need to modify its DNS records independently to resolve to the router.
 
@@ -177,13 +169,13 @@ An ImageStream stores a mapping of tags to images, metadata overrides that are a
 
 #### What are the benefits
 
-{% collapsible %}
+
 
 Using an ImageStream makes it easy to change a tag for a container image.  Otherwise to change a tag you need to download the whole image, change it locally, then push it all back. Also promoting applications by having to do that to change the tag and then update the deployment object entails many steps.  With ImageStreams you upload a container image once and then you manage it’s virtual tags internally in OpenShift.  In one project you may use the `dev` tag and only change reference to it internally, in prod you may use a `prod` tag and also manage it internally. You don't really have to deal with the registry!
 
 You can also use ImageStreams in conjunction with DeploymentConfigs to set a trigger that will start a deployment as soon as a new image appears or a tag changes its reference.
 
-{% endcollapsible %}
+
 
 See here for more details: [https://blog.openshift.com/image-streams-faq/](https://blog.openshift.com/image-streams-faq/) <br>
 OpenShift Docs: [https://docs.openshift.com/aro/4/openshift_images/managing_images/managing-images-overview.html](https://docs.openshift.com/aro/4/openshift_images/managing_images/managing-images-overview.html)<br>
