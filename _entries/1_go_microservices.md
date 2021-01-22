@@ -2,7 +2,7 @@
 
 Now that you have your environment provisioned and the prerequisites fulfilled, it is time to start working on the labs.
 
-Application Overview
+## Application Overview
 
 You will be deploying a ratings application on Azure Red Hat OpenShift.
 
