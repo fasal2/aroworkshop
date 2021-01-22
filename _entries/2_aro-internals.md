@@ -27,7 +27,7 @@ OSToy is a simple Node.js application that we will deploy to Azure Red Hat OpenS
 
 ### OSToy Application Diagram
 
-![OSToy Diagram](/media/managedlab/4-ostoy-arch.png)
+![OSToy Diagram](../media/managedlab/4-ostoy-arch.png)
 
 ### Familiarization with the Application UI
 
@@ -41,13 +41,13 @@ OSToy is a simple Node.js application that we will deploy to Azure Red Hat OpenS
 8. **Networking:** Tools to illustrate networking within the application.
 9. Shows some more information about the application.
 
-![Home Page](/media/managedlab/10-ostoy-homepage-1.png)
+![Home Page](../media/managedlab/10-ostoy-homepage-1.png)
 
 ### Learn more about the application
 
 To learn more, click on the "About" menu item on the left once we deploy the app.
 
-![ostoy About](/media/managedlab/5-ostoy-about.png)
+![ostoy About](../media/managedlab/5-ostoy-about.png)
 
 ## Application Deployment
 
@@ -55,9 +55,9 @@ To learn more, click on the "About" menu item on the left once we deploy the app
 
 If not logged in via the CLI, click on the dropdown arrow next to your name in the top-right and select *Copy Login Command*.
 
-{% collapsible %}
 
-![CLI Login](/media/managedlab/7-ostoy-login.png)
+
+![CLI Login](../media/managedlab/7-ostoy-login.png)
 
 A new tab will open and select the authentication method you are using
 
@@ -75,13 +75,13 @@ Using project "default".
 
 ```
 
-{% endcollapsible %}
+
 
 ### Create new project
 
 Create a new project called "OSToy" in your cluster.
 
-{% collapsible %}
+
 
 Use the following command
 
@@ -104,15 +104,15 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 
 Equivalently you can also create this new project using the web UI by selecting *Home > Projects* on the left menu, then clicking on "Create Project" button on the left.
 
-![UI Create Project](/media/managedlab/6-ostoy-newproj.png)
+![UI Create Project](../media/managedlab/6-ostoy-newproj.png)
 
-{% endcollapsible %}
+
 
 ### View the YAML deployment objects
 
 View the Kubernetes deployment object yamls.  If you wish you can download them from the following locations to your Azure Cloud Shell, in a directory of your choosing (just remember where you placed them for the next step). Or just use the direct link in the next step.
 
-{% collapsible %}
+
 
 Feel free to open them up and take a look at what we will be deploying. For simplicity of this lab we have placed all the Kubernetes objects we are deploying in one "all-in-one" yaml file.  Though in reality there are benefits to separating these out into individual yaml files.
 
@@ -120,13 +120,13 @@ Feel free to open them up and take a look at what we will be deploying. For simp
 
 [ostoy-microservice-deployment.yaml](https://github.com/microsoft/aroworkshop/blob/master/yaml/ostoy-microservice-deployment.yaml)
 
-{% endcollapsible %}
+
 
 ### Deploy backend microservice
 
 The microservice application serves internal web requests and returns a JSON object containing the current hostname and a randomly generated color string.
 
-{% collapsible %}
+
 
 In your command line deploy the microservice using the following command:
 
@@ -139,13 +139,13 @@ deployment.apps/ostoy-microservice created
 service/ostoy-microservice-svc created
 ```
 
-{% endcollapsible %}
+
 
 ### Deploy the front-end service
 
 The frontend deployment contains the node.js frontend for our application along with a few other Kubernetes objects to illustrate examples.
 
-{% collapsible %}
+
 
  If you open the *ostoy-fe-deployment.yaml* you will see we are defining:
 
@@ -174,13 +174,13 @@ configmap/ostoy-configmap-files created
 secret/ostoy-secret created
 ```
 
-{% endcollapsible %}
+
 
 ### Get route
 
 Get the route so that we can access the application via `oc get route`
 
-{% collapsible %}
+
 
 You should see the following response:
 
@@ -191,9 +191,9 @@ ostoy-route   ostoy-route-ostoy.apps.abcd1234.westus2.aroapp.io             osto
 
 Copy `ostoy-route-ostoy.apps.abcd1234.westus2.aroapp.io` above and paste it into your browser and press enter.  You should see the homepage of our application.
 
-![Home Page](/media/managedlab/10-ostoy-homepage.png)
+![Home Page](../media/managedlab/10-ostoy-homepage.png)
 
-{% endcollapsible %}
+
 
 ## Logging and Metrics
 
@@ -201,15 +201,15 @@ Assuming you can access the application via the Route provided and are still log
 
 Click on the *Home* menu item and then click in the message box for "Log Message (stdout)" and write any message you want to output to the *stdout* stream.  You can try "**All is well!**".  Then click "Send Message".
 
-![Logging stdout](/media/managedlab/8-ostoy-stdout.png)
+![Logging stdout](../media/managedlab/8-ostoy-stdout.png)
 
 Click in the message box for "Log Message (stderr)" and write any message you want to output to the *stderr* stream. You can try "**Oh no! Error!**".  Then click "Send Message".
 
-![Logging stderr](/media/managedlab/9-ostoy-stderr.png)
+![Logging stderr](../media/managedlab/9-ostoy-stderr.png)
 
 ### View logs directly from the pod
 
-{% collapsible %}
+
 
 Go to the CLI and enter the following command to retrieve the name of your frontend pod which we will use to view the pod logs:
 
@@ -232,11 +232,11 @@ stderr: Oh no! Error!
 
 You should see both the *stdout* and *stderr* messages.
 
-{% endcollapsible %}
+
 
 ### View logs using Azure Monitor Integration
 
-{% collapsible %}
+
 
 One can use the native Azure service, Azure Monitor, to view and keep application logs along with metrics. In order to complete this integration you will need to follow the documentation [here](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-azure-redhat4-setup) and particularly the prerequisites.  The prerequisites are:
 
@@ -259,11 +259,11 @@ Once the steps to connect Azure Monitor to an existing cluster were successfully
 
 Click on "Monitor" under the left hamburger menu.
 
-![Monitor](/media/managedlab/24-ostoy-azuremonitor.png)
+![Monitor](../media/managedlab/24-ostoy-azuremonitor.png)
 
 Click Logs in the left menu. Click the "Get started" button if that screen shows up.
 
-![container logs](/media/managedlab/29-ostoy-logs.png)
+![container logs](../media/managedlab/29-ostoy-logs.png)
 
 If you are asked to select a scope select the Log Analytics workspace you created
 
@@ -275,11 +275,11 @@ Change the time range to be "Last 30 Minutes".
 
 Then click the "Run" button at the top.
 
-![container logs](/media/managedlab/30-ostoy-logs.png)
+![container logs](../media/managedlab/30-ostoy-logs.png)
 
 In the bottom pane you will see the results of the application logs returned.  You might need to sort, but you should see the two lines we outputted to *stdout* and *stderr*. 
 
-![container logs](/media/managedlab/31-ostoy-logout.png)
+![container logs](../media/managedlab/31-ostoy-logout.png)
 
 If the logs are particularly chatty then you can paste the following query to see your message.
 
@@ -288,24 +288,24 @@ ContainerLog
 | where LogEntry contains "<Your Message>"
 ```
 
-{% endcollapsible %}
+
 
 
 ### View Metrics using Azure Monitor Integration
 
-{% collapsible %}
+
 
 Click on "Containers" in the left menu under **Insights**.
 
-![Containers](/media/managedlab/25-ostoy-monitorcontainers.png)
+![Containers](../media/managedlab/25-ostoy-monitorcontainers.png)
 
 You might need to click on the "Monitored clusters" tab. Click on your cluster that is integrated with Azure Monitor. 
 
-![Cluster](/media/managedlab/26-ostoy-monitorcluster.png)
+![Cluster](../media/managedlab/26-ostoy-monitorcluster.png)
 
 You will see metrics for your cluster such as resource consumption over time and pod counts.  Feel free to explore the metrics here.  
 
-![Metrics](/media/managedlab/27-ostoy-metrics.png)
+![Metrics](../media/managedlab/27-ostoy-metrics.png)
 
 For example, if you want to see how much resources our OSTOY pods are using click on the "Containers" tab.
 
@@ -313,19 +313,19 @@ Enter "ostoy" into the search box near the top left.
 
 You will see the 2 pods we have, one for the front-end and one for the microservice and the relevant metric.  Feel free to select other options to see min, max or other percentile usages of the pods.  You can also change to see memory consumption
 
-![container metrics](/media/managedlab/28-ostoy-metrics.png)
+![container metrics](../media/managedlab/28-ostoy-metrics.png)
 
-{% endcollapsible %}
+
 
 ## Exploring Health Checks
 
 In this section we will intentionally crash our pods as well as make a pod non-responsive to the liveness probes and see how Kubernetes behaves.  We will first intentionally crash our pod and see that Kubernetes will self-heal by immediately spinning it back up. Then we will trigger the health check by stopping the response on the `/health` endpoint in our app. After three consecutive failures, Kubernetes should kill the pod and then recreate it.
 
-{% collapsible %}
+
 
 It would be best to prepare by splitting your screen between the OpenShift Web UI and the OSToy application so that you can see the results of our actions immediately.
 
-![Splitscreen](/media/managedlab/23-ostoy-splitscreen.png)
+![Splitscreen](../media/managedlab/23-ostoy-splitscreen.png)
 
 But if your screen is too small or that just won't work, then open the OSToy application in another tab so you can quickly switch to the OpenShift Web Console once you click the button. To get to this deployment in the OpenShift Web Console go to the left menu and click: 
 
@@ -333,36 +333,36 @@ But if your screen is too small or that just won't work, then open the OSToy app
 
 Go to the browser tab that has your OSToy app, click on *Home* in the left menu, and enter a message in the "Crash Pod" tile (e.g.: "This is goodbye!") and press the "Crash Pod" button.  This will cause the pod to crash and Kubernetes should restart the pod. After you press the button you will see:
 
-![Crash Message](/media/managedlab/12-ostoy-crashmsg.png)
+![Crash Message](../media/managedlab/12-ostoy-crashmsg.png)
 
 Quickly switch to the tab with the Deployment showing in the Web Console. You will see that the pod is red, meaning it is down but should quickly come back up and show blue.  It does happen quickly so you might miss it.
 
-![Pod Crash](/media/managedlab/13-ostoy-podcrash.png)
+![Pod Crash](../media/managedlab/13-ostoy-podcrash.png)
 
 You can also check in the pod events and further verify that the container has crashed and been restarted.
 
 Click on *Pods > [Pod Name] > Events*
 
-![Pods](/media/managedlab/13.1-ostoy-fepod.png)
+![Pods](../media/managedlab/13.1-ostoy-fepod.png)
 
 
-![Pod Events](/media/managedlab/14-ostoy-podevents.png)
+![Pod Events](../media/managedlab/14-ostoy-podevents.png)
 
 Keep the page from the pod events still open from the previous step.  Then in the OSToy app click on the "Toggle Health" button, in the "Toggle Health Status" tile.  You will see the "Current Health" switch to "I'm not feeling all that well".
 
-![Pod Events](/media/managedlab/15-ostoy-togglehealth.png)
+![Pod Events](../media/managedlab/15-ostoy-togglehealth.png)
 
 This will cause the app to stop responding with a "200 HTTP code". After 3 such consecutive failures ("A"), Kubernetes will kill the pod ("B") and restart it ("C"). Quickly switch back to the pod events tab and you will see that the liveness probe failed and the pod as being restarted.
 
-![Pod Events2](/media/managedlab/16-ostoy-podevents2.png)
+![Pod Events2](../media/managedlab/16-ostoy-podevents2.png)
 
-{% endcollapsible %}
+
 
 ## Persistent Storage
 
 In this section we will execute a simple example of using persistent storage by creating a file that will be stored on a persistent volume in our cluster and then confirm that it will "persist" across pod failures and recreation.
 
-{% collapsible %}
+
 
 Inside the OpenShift web UI click on *Storage > Persistent Volume Claims* in the left menu. You will then see a list of all persistent volume claims that our application has made.  In this case there is just one called "ostoy-pvc".  If you click on it you will also see other pertinent information such as whether it is bound or not, size, access mode and creation time.  
 
@@ -372,11 +372,11 @@ In the OSToy app click on *Persistent Storage* in the left menu.  In the "Filena
 
 Underneath that, in the "File Contents" box, enter text to be stored in the file. (e.g.: "Azure Red Hat OpenShift is the greatest thing since sliced bread!" or "test" :) ).  Then click "Create file".
 
-![Create File](/media/managedlab/17-ostoy-createfile.png)
+![Create File](../media/managedlab/17-ostoy-createfile.png)
 
 You will then see the file you created appear above under "Existing files".  Click on the file and you will see the filename and the contents you entered.
 
-![View File](/media/managedlab/18-ostoy-viewfile.png)
+![View File](../media/managedlab/18-ostoy-viewfile.png)
 
 We now want to kill the pod and ensure that the new pod that spins up will be able to see the file we created. Exactly like we did in the previous section. Click on *Home* in the left menu.
 
@@ -386,7 +386,7 @@ Click on *Persistent Storage* in the left menu
 
 You will see the file you created is still there and you can open it to view its contents to confirm.
 
-![Crash Message](/media/managedlab/19-ostoy-existingfile.png)
+![Crash Message](../media/managedlab/19-ostoy-existingfile.png)
 
 Now let's confirm that it's actually there by using the CLI and checking if it is available to the container.  If you remember we [mounted the directory](yaml/ostoy-fe-deployment.yaml#L50) `/var/demo_files` to our PVC.  So get the name of your frontend pod
 
@@ -422,7 +422,7 @@ Azure Red Hat OpenShift is the greatest thing since sliced bread!
 
 Then exit the SSH session by typing `exit`. You will then be in your CLI.
 
-{% endcollapsible %}
+
 
 ## Configuration
 
@@ -432,7 +432,7 @@ In this section we'll take a look at how OSToy can be configured using [ConfigMa
 
 ConfigMaps allow you to decouple configuration artifacts from container image content to keep containerized applications portable.
 
-{% collapsible %}
+
 
 Click on *Config Maps* in the left menu.
 
@@ -447,13 +447,13 @@ data:
   config.json:  '{ "default": "123" }'
 ```
 
-{% endcollapsible %}
+
 
 ### Configuration using Secrets
 
 Kubernetes Secret objects allow you to store and manage sensitive information, such as passwords, OAuth tokens, and ssh keys. Putting this information in a secret is safer and more flexible than putting it, verbatim, into a Pod definition or a container image.
 
-{% collapsible %}
+
 
 Click on *Secrets* in the left menu.
 
@@ -469,13 +469,13 @@ data:
 type: Opaque
 ```
 
-{% endcollapsible %}
+
 
 ### Configuration using Environment Variables
 
 Using environment variables is an easy way to change application behavior without requiring code changes. It allows different deployments of the same application to potentially behave differently based on the environment variables, and OpenShift makes it simple to set, view, and update environment variables for Pods/Deployments.
 
-{% collapsible %}
+
 
 Click on *ENV Variables* in the left menu.
 
@@ -499,7 +499,7 @@ This will display the environment variables available to the OSToy application. 
 
 The last one, `MICROSERVICE_NAME` is used for the intra-cluster communications between pods for this application.  The application looks for this environment variable to know how to access the microservice in order to get the colors.
 
-{% endcollapsible %}
+
 
 ## Networking and Scaling
 
@@ -507,7 +507,7 @@ In this section we'll see how OSToy uses intra-cluster networking to separate fu
 
 Let's review how this application is set up...
 
-![OSToy Diagram](/media/managedlab/4-ostoy-arch.png)
+![OSToy Diagram](../media/managedlab/4-ostoy-arch.png)
 
 As can be seen in the image above we have defined at least 2 separate pods, each with its own service.  One is the frontend web application (with a service and a publicly accessible route) and the other is the backend microservice with a service object created so that the frontend pod can communicate with the microservice (across the pods if more than one).  Therefore this microservice is not accessible from outside this cluster, nor from other namespaces/projects (due to ARO's [network policy](https://docs.openshift.com/aro/4/networking/network_policy/about-network-policy.html#nw-networkpolicy-about_about-network-policy), **ovs-networkpolicy**).  The sole purpose of this microservice is to serve internal web requests and return a JSON object containing the current hostname and a randomly generated color string.  This color string is used to display a box with that color displayed in the tile titled "Intra-cluster Communication".
 
@@ -515,7 +515,7 @@ As can be seen in the image above we have defined at least 2 separate pods, each
 
 Click on *Networking* in the left menu. Review the networking configuration.
 
-{% collapsible %}
+
 
 The right tile titled "Hostname Lookup" illustrates how the service name created for a pod can be used to translate into an internal ClusterIP address. Enter the name of the microservice following the format of `my-svc.my-namespace.svc.cluster.local` which we created in our `ostoy-microservice.yaml` which can be seen here:
 
@@ -540,15 +540,15 @@ In this case we will enter: `ostoy-microservice-svc.ostoy.svc.cluster.local`
 
 We will see an IP address returned.  In our example it is ```172.30.165.246```.  This is the intra-cluster IP address; only accessible from within the cluster.
 
-![ostoy DNS](/media/managedlab/20-ostoy-dns.png)
+![ostoy DNS](../media/managedlab/20-ostoy-dns.png)
 
-{% endcollapsible %}
+
 
 ### Scaling
 
 OpenShift allows one to scale up/down the number of pods for each part of an application as needed.  This can be accomplished by changing our *replicaset/deployment* definition (declarative), through the command line (imperative), or through the web UI (imperative). In our deployment definition (part of our `ostoy-fe-deployment.yaml`) we stated that we only want one pod for our microservice to start with. This means that the Kubernetes Replication Controller will always strive to keep one pod alive.
 
-{% collapsible %}
+
 
 If we look at the tile on the left we should see one box randomly changing colors.  This box displays the randomly generated color sent to the frontend by our microservice along with the pod name that sent it. Since we see only one box that means there is only one microservice pod.  We will now scale up our microservice pods and will see the number of boxes change.
 
@@ -585,7 +585,7 @@ Confirm that there are now 3 pods via the CLI (`oc get pods`) or the web UI (*Ov
 
 See this visually by visiting the OSToy app and seeing how many boxes you now see.  It should be three.
 
-![UI Scale](/media/managedlab/22-ostoy-colorspods.png)
+![UI Scale](../media/managedlab/22-ostoy-colorspods.png)
 
 Now we will scale the pods down using the command line.  Execute the following command from the CLI: 
 
@@ -597,11 +597,11 @@ See this visually by visiting the OSToy App and seeing how many boxes you now se
 
 Lastly let's use the web UI to scale back down to one pod.  In the project you created for this app (ie: "ostoy") in the left menu click *Overview > expand "ostoy-microservice"*.  On the right you will see a blue circle with the number 2 in the middle. Click on the down arrow to the right of that to scale the number of pods down to 1.
 
-![UI Scale](/media/managedlab/21-ostoy-uiscale.png)
+![UI Scale](../media/managedlab/21-ostoy-uiscale.png)
 
 See this visually by visiting the OSToy app and seeing how many boxes you now see.  It should be one.  You can also confirm this via the CLI or the web UI
 
-{% endcollapsible %}
+
 
 ### Autoscaling
 
@@ -612,7 +612,7 @@ As defined in the Kubernetes documentation:
 
 We will create an HPA and then use OSToy to generate CPU intensive workloads.  We will then observe how the HPA will scale up the number of pods in order to handle the increased workloads.  
 
-{% collapsible %}
+
 
 #### 1. Create the Horizontal Pod Autoscaler
 
@@ -624,11 +624,11 @@ Run the following command to create the autoscaler. This will create an HPA that
 
 In the OSToy app in the left menu click on "Autoscaling" to access this portion of the workshop.  
 
-![HPA Menu](/media/managedlab/32-hpa-menu.png)
+![HPA Menu](../media/managedlab/32-hpa-menu.png)
 
 As was in the networking section you will see the total number of pods available for the microservice by counting the number of colored boxes.  In this case we have only one.  This can be verified through the web UI or from the CLI.
 
-![HPA Main](/media/managedlab/33-hpa-mainpage.png)
+![HPA Main](../media/managedlab/33-hpa-mainpage.png)
 
 You can use the following command to see the running microservice pods only:
 `oc get pods --field-selector=status.phase=Running | grep microservice`
@@ -651,11 +651,11 @@ After about a minute the new pods will show up on the page (represented by the c
 
 After confirming that the autoscaler did spin up new pods, revisit Azure Monitor like we did in the logging section.  By clickin on the containers tab we can see the resource consumption of the pods and see that three pods were created to handle the load.
 
-![HPA Metrics](/media/managedlab/34-ostoy-hpametrics.png)
+![HPA Metrics](../media/managedlab/34-ostoy-hpametrics.png)
 
 
 
-{% endcollapsible %}
+
 
 
 
