@@ -34,8 +34,6 @@ Once the environment is provisioned, a screen with all the appropriate lab crede
 
 ![Credentials](../media/managedlab/3-credentials.png)
 
-You can now skip the **Create cluster** section and jump to [create project](#createproject).
-
 ### Tools
 
 #### Azure Cloud Shell
