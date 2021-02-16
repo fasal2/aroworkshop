@@ -234,7 +234,7 @@ You should see both the *stdout* and *stderr* messages.
 
 
 
-### View logs using Azure Monitor Integration
+## View logs using Azure Monitor Integration
 
 
 
@@ -250,8 +250,7 @@ One can use the native Azure service, Azure Monitor, to view and keep applicatio
 
 - A [Log Analytics workspace](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/design-logs-deployment) 
 
-
-Please follow the below steps to create the Log Ananlytics workspace.
+### Create the Log Ananlytics workspace
 
 Sign in to the Azure portal at https://portal.azure.com.
 
@@ -268,7 +267,77 @@ Click **Add**, and then select choices for the following items:
 
 After providing the required information on the Log Analytics Workspace pane, click OK.
 
-Then follow the steps to [Enable Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-azure-redhat4-setup#integrate-with-an-existing-workspace) for our cluster. 
+Then follow the below  steps to Enable Azure Monitor for our cluster (for more details goto [Enable Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-azure-redhat4-setup#integrate-with-an-existing-workspace))
+
+
+### Enable monitoring for an existing cluster
+
+To enable monitoring for an Azure Red Hat OpenShift version 4 or later cluster that's deployed in Azure by using the provided Bash script, do the following:
+
+
+Download and save the script that configures your cluster with the monitoring add-in by running the following command:
+
+```
+curl -o enable-monitoring.sh -L https://aka.ms/enable-monitoring-bash-script
+```
+
+To identify the kubeContext of your cluster, run the following commands
+
+```
+adminUserName=$(az aro list-credentials -g $clusterResourceGroup -n $clusterName --query 'kubeadminUsername' -o tsv)
+adminPassword=$(az aro list-credentials -g $clusterResourceGroup -n $clusterName --query 'kubeadminPassword' -o tsv)
+apiServer=$(az aro show -g $clusterResourceGroup -n $clusterName --query apiserverProfile.url -o tsv)
+oc login $apiServer -u $adminUserName -p $adminPassword
+# openshift project name for azure monitor for containers
+openshiftProjectName="azure-monitor-for-containers"
+oc new-project $openshiftProjectName
+# get the kube config context
+kubeContext=$(oc config current-context)
+```
+
+Copy the value for later use.
+
+### Integrate with an existing workspace
+
+In this section, you enable monitoring of your cluster using the Bash script you downloaded earlier. To integrate with an existing Log Analytics workspace, start by identifying the full resource ID of your Log Analytics workspace that's required for the **logAnalyticsWorkspaceResourceId** parameter(you can find it under properties section of the Log Ananlytics workspace in Azure), and then run the command to enable the monitoring add-in against the specified workspace.
+
+
+List all the subscriptions that you have access to by running the following command:
+```
+az account list --all -o table
+```
+The output will look like the following:
+
+```
+Name                                  CloudName    SubscriptionId                        State    IsDefault
+------------------------------------  -----------  ------------------------------------  -------  -----------
+Microsoft Azure                       AzureCloud   0fb60ef2-03cc-4290-b595-e71108e8f4ce  Enabled  True
+```
+Copy the value for SubscriptionId.
+
+
+Display the list of workspaces in your subscriptions in the default JSON format by running the following command:
+
+```
+az resource list --resource-type Microsoft.OperationalInsights/workspaces -o json
+```
+
+In the output, find the workspace name, and then copy the full resource ID of that Log Analytics workspace under the field ID.
+
+To enable monitoring, run the following command. Replace the values for the azureAroV4ClusterResourceId, logAnalyticsWorkspaceResourceId, and kubeContext parameters.
+
+```
+export azureAroV4ClusterResourceId=“/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/<clusterName>”
+export logAnalyticsWorkspaceResourceId=“/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/microsoft.operationalinsights/workspaces/<workspaceName>”
+export kubeContext="<kubeContext name of your ARO v4 cluster>"  
+```
+Here is the command you must run once you have populated the 3 variables with Export commands:
+
+```
+enable-monitoring.sh --resource-id $azureAroV4ClusterResourceId --kube-context $kubeContext --workspace-id $logAnalyticsWorkspaceResourceId
+```
+After you've enabled monitoring, it might take about 15-20 minutes before you can view the health metrics for the cluster.
+
 
 Once the steps to connect Azure Monitor to an existing cluster were successfully completed, access the [Azure portal](https://portal.azure.com)
 
