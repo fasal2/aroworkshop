@@ -238,7 +238,7 @@ You should see both the *stdout* and *stderr* messages.
 
 
 
-One can use the native Azure service, Azure Monitor, to view and keep application logs along with metrics. In order to complete this integration you will need to follow the documentation [here](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-azure-redhat4-setup) and particularly the prerequisites.  The prerequisites are:
+One can use the native Azure service, Azure Monitor, to view and keep application logs along with metrics. In order to complete this integration the prerequisites are:
 
 - The Azure CLI version 2.0.72 or later
 
@@ -250,7 +250,23 @@ One can use the native Azure service, Azure Monitor, to view and keep applicatio
 
 - A [Log Analytics workspace](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/design-logs-deployment) 
 
-Please follow the document [here](https://docs.microsoft.com/en-us/azure/azure-monitor/learn/quick-create-workspace) to create Log Ananlytics workspace.
+
+Please follow the below steps to create the Log Ananlytics workspace.
+
+Sign in to the Azure portal at https://portal.azure.com.
+
+In the Azure portal, click All services. In the list of resources, type **Log Analytics**. As you begin typing, the list filters based on your input. Select **Log Analytics workspaces**.
+
+Click **Add**, and then select choices for the following items:
+
+* Provide a name for the new Log Analytics workspace, such as DefaultLAWorkspace. This name must be globally unique across all Azure Monitor subscriptions.
+
+* Select the Subscription by selecting from the drop-down list
+* For Resource Group, choose to use an existing resource group already setup .
+
+* Select an available Location. For more information, see which regions Log Analytics is available in and search for Azure Monitor from the Search for a product field.
+
+After providing the required information on the Log Analytics Workspace pane, click OK.
 
 Then follow the steps to [Enable Azure Monitor](https://docs.microsoft.com/en-us/azure/azure-monitor/insights/container-insights-azure-redhat4-setup#integrate-with-an-existing-workspace) for our cluster. 
 
