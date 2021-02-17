@@ -332,21 +332,15 @@ az resource list --resource-type Microsoft.OperationalInsights/workspaces -o jso
 
 In the output, find the workspace name, and then copy the full resource ID of that Log Analytics workspace under the field ID.
 
-Let's initialize the values for SubscriptionID and Log Analytics Workspace name. Sign in to Azure, search for subscription in Azure. Select the listed subscription and copy the subscription ID from there and paste it in the below command.
+To get the SubscriptionID, Sign in to Azure, search for subscription in Azure. Select the listed subscription and copy the subscription ID.
+
+To enable monitoring, run the following command. Replace the values for the <Subscription_ID>, <Resource_Group_Name>, <ARO_Cluster_Name> and <Log_Analytics_Workspace_Name>.
 
 ```
-export SUBSCRIPTIONID=<Paste the subscription ID here>
-export WORKSPACENAME=<Name of Log Analytics workspace you just created>
+export azureAroV4ClusterResourceId=“/subscriptions/<Subscription_ID>/resourceGroups/<Resource_Group_Name>/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/<ARO_Cluster_Name>”
+export logAnalyticsWorkspaceResourceId=“/subscriptions/<Subscription_ID>/resourceGroups/<Resource_Group_Name>/providers/microsoft.operationalinsights/workspaces/<Log_Analytics_Workspace_Name>”
 ```
-
-To enable monitoring, run the following command. Replace the values for the azureAroV4ClusterResourceId, logAnalyticsWorkspaceResourceId, and kubeContext parameters.
-
-```
-export azureAroV4ClusterResourceId=“/subscriptions/$SUBSCRIPTIONID/resourceGroups/$RESOURCEGROUP/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/$CLUSTER”
-export logAnalyticsWorkspaceResourceId=“/subscriptions/$SUBSCRIPTIONID/resourceGroups/$RESOURCEGROUP/providers/microsoft.operationalinsights/workspaces/$WORKSPACENAME”
-export kubeContext="<kubeContext name of your ARO v4 cluster>"  
-```
-Here is the command you must run once you have populated the 3 variables with Export commands:
+Here is the command you must run once you have populated the variables with Export commands:
 
 ```
 enable-monitoring.sh --resource-id $azureAroV4ClusterResourceId --kube-context $kubeContext --workspace-id $logAnalyticsWorkspaceResourceId
