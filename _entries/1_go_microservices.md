@@ -26,7 +26,12 @@ Once you're done, you'll have an experience similar to the below.
 
 You can log into the cluster using the `kubeadmin` user.  
 
+Now, initialise the values for Resource group name and Cluster name. You can find the Resource group name and Cluster name in lab environment details page. Replace the values and run the below commands:
 
+```
+export RESOURCEGROUP=<Resource_group_name>
+export CLUSTER=<Cluster_name>
+```
 
 Run the following command to find the password for the `kubeadmin` user.
 
