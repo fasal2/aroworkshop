@@ -117,7 +117,7 @@ There are two templates available:
 
 * `mongodb-persistent` uses a persistent volume store for the database data which means the data will survive a pod restart. Using persistent volumes requires a persistent volume pool be defined in the Azure Red Hat OpenShift deployment.
 
-Run the below commands download `mongodb-persistent` template to cloudshell and create the template in openshift namespace :
+Run the below commands to download `mongodb-persistent` template and create the template in openshift namespace :
 
 ```
 wget https://raw.githubusercontent.com/openshift/origin/master/examples/db-templates/mongodb-persistent-template.json
