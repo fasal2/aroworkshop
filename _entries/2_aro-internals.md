@@ -334,7 +334,7 @@ In the output, find the workspace name, and then copy the full resource ID of th
 
 To get the SubscriptionID, Sign in to Azure, search for subscription in Azure. Select the listed subscription and copy the subscription ID.
 
-To enable monitoring, run the following command. Replace the values for the <Subscription_ID>, <Resource_Group_Name>, <ARO_Cluster_Name> and <Log_Analytics_Workspace_Name>.
+To enable monitoring, run the following command. Replace the values for the `<Subscription_ID>`, `<Resource_Group_Name>`, `<ARO_Cluster_Name>` and `<Log_Analytics_Workspace_Name>`.
 
 ```
 export azureAroV4ClusterResourceId=“/subscriptions/<Subscription_ID>/resourceGroups/<Resource_Group_Name>/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/<ARO_Cluster_Name>”
