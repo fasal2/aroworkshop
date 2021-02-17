@@ -121,6 +121,7 @@ Run the below commands to download `mongodb-persistent` template and create the 
 
 ```
 wget https://raw.githubusercontent.com/openshift/origin/master/examples/db-templates/mongodb-persistent-template.json
+
 oc create -f mongodb-persistent-template.json -n openshift
 ```
 
