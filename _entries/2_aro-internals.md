@@ -279,6 +279,8 @@ Download and save the script that configures your cluster with the monitoring ad
 
 ```
 curl -o enable-monitoring.sh -L https://aka.ms/enable-monitoring-bash-script
+
+chmod +x enable-monitoring.sh
 ```
 
 Now, initialise the values for Resource group name and Cluster name. You can find the Resource group name and Cluster name in lab environment details page. Replace the values and run the below commands:
